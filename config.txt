@@ -1,0 +1,10 @@
+data:
+  allow-snippet-annotations: "true"
+  enable-modsecurity: "true"
+  enable-owasp-modsecurity-crs: "true"
+  modsecurity-snippet: |
+    SecRuleEngine On
+    SecRequestBodyAccess On
+    SecRequestBodyLimit 131072
+    SecRule REQUEST_HEADERS:Content-Type "application/json" \
+        "id:200001,phase:1,t:none,t:lowercase,pass,nolog,ctl:requestBodyProcessor=JSON"
